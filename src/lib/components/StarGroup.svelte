@@ -10,7 +10,7 @@
 	let { group, onToggleStar, onTogglePractice }: Props = $props()
 
 	function formatStarTime(time: number) {
-		return `${Math.floor(time / 60000)}:${String(Math.floor(time / 1000) % 60).padStart(2, '0')}`
+		return `${String(Math.floor(time / 60000)).padStart(2, '0')}:${String(Math.floor(time / 1000) % 60).padStart(2, '0')}`
 	}
 </script>
 
@@ -19,7 +19,11 @@
 
 	{#each group.stars as star}
 		<div class:inactive={!star.active} class:done={star.done} class:practice={star.practice} class="star-item">
-			<input id={`star-toggle-${star.id}`} type="checkbox" checked={star.active} onchange={() => onToggleStar(star.id)} />
+			<input
+				id={`star-toggle-${star.id}`}
+				type="checkbox"
+				checked={star.active}
+				onchange={() => onToggleStar(star.id)} />
 			<label class="star-name" for={`star-toggle-${star.id}`}>{star.name}</label>
 			<span class="practice-badge">practice</span>
 			<span class="star-meta">
@@ -38,8 +42,7 @@
 					class:active={star.practice}
 					class="practice-btn"
 					title="Toggle practice"
-					onclick={() => onTogglePractice(star.id)}
-				>
+					onclick={() => onTogglePractice(star.id)}>
 					📝
 				</button>
 			</span>
